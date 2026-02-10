@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Für dich, mein Schatz</title>
+    <meta name="description" content="Eine besondere Valentinstag-Überraschung für die allerbeste Frau der Welt 💝">
+    <meta property="og:title" content="💗 Für dich, mein Schatz">
+    <meta property="og:description" content="Eine kleine Valentinstag-Überraschung 💝">
+    <meta property="og:type" content="website">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Ambient Glow Orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Main Card -->
+    <main class="card-container" id="cardContainer">
+        <div class="card" id="mainCard">
+
+            <div class="card-content">
+                <div class="card-emoji-top">💝</div>
+                <h1 class="card-title">
+                    Für die <span class="highlight">Allerbeste</span>
+                </h1>
+                <div class="card-emoji-middle">🥰</div>
+                <p class="card-question">Wirst du mein Valentinstag sein?</p>
+                <div class="card-buttons">
+                    <button class="btn btn-yes" id="btnYes">
+                        <span class="btn-text">Ja!</span>
+                        <span class="btn-icon">💕</span>
+                    </button>
+                    <button class="btn btn-no" id="btnNo">
+                        <span class="btn-text">Nein</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success / Love Message Overlay -->
+    <div class="love-overlay" id="loveOverlay">
+        <div class="love-message" id="loveMessage">
+            <div class="love-emoji">💖</div>
+            <h2 class="love-title">Ich wusste es!</h2>
+            <p class="love-text">Du bist die Beste, was mir je passiert ist. Ich liebe dich unendlich! 💗</p>
+            <div class="love-date">14. Februar 2026</div>
+            <div class="love-hearts">
+                <span>❤️</span><span>🧡</span><span>💛</span><span>💚</span><span>💙</span><span>💜</span><span>🩷</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Footer -->
+    <footer
+        style="position: fixed; bottom: 12px; left: 0; width: 100%; text-align: center; z-index: 5; pointer-events: none;">
+        <p
+            style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.3px;">
+            © Valentinka 2026. Alle Rechte, wie auch meine Liebe, sind geschützt und gehören Anastasia Tome💗
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

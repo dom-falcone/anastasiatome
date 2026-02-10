@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💔</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, sans-serif;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg,
+                    #0d0a2e 0%,
+                    #1a1050 25%,
+                    #2a1570 50%,
+                    #1a1050 75%,
+                    #0d0a2e 100%);
+            background-size: 400% 400%;
+            animation: sadGradient 10s ease-in-out infinite;
+        }
+
+        @keyframes sadGradient {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Sad particles */
+        .sad-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .tear {
+            position: absolute;
+            top: -20px;
+            opacity: 0;
+            animation: tearFall linear infinite;
+            color: rgba(100, 140, 255, 0.25);
+        }
+
+        @keyframes tearFall {
+            0% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.2;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Content */
+        .sad-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .sad-emoji {
+            font-size: 96px;
+            margin-bottom: 24px;
+            display: inline-block;
+            animation: sadBounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes sadBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            30% {
+                transform: translateY(-8px) rotate(-3deg);
+            }
+
+            60% {
+                transform: translateY(0) rotate(2deg);
+            }
+        }
+
+        .sad-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 32px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 20px rgba(100, 100, 255, 0.3);
+        }
+
+        .broken-heart {
+            font-size: 120px;
+            display: inline-block;
+            animation: heartBreak 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(255, 50, 50, 0.4));
+        }
+
+        @keyframes heartBreak {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+
+            20% {
+                transform: scale(1.1) rotate(-2deg);
+            }
+
+            40% {
+                transform: scale(0.95) rotate(1deg);
+            }
+
+            60% {
+                transform: scale(1.05) rotate(-1deg);
+            }
+
+            80% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Back button — subtle */
+        .back-btn {
+            margin-top: 48px;
+            padding: 12px 32px;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.5);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Ambient glow */
+        .sad-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .sad-orb-1 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #4444ff, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation: orbSad1 8s ease-in-out infinite;
+        }
+
+        .sad-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #6644aa, transparent 70%);
+            bottom: -80px;
+            right: -80px;
+            animation: orbSad2 10s ease-in-out infinite;
+        }
+
+        @keyframes orbSad1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, 20px);
+            }
+        }
+
+        @keyframes orbSad2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-20px, -30px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .sad-emoji {
+                font-size: 72px;
+            }
+
+            .sad-title {
+                font-size: 2rem;
+            }
+
+            .broken-heart {
+                font-size: 88px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Ambient orbs -->
+    <div class="sad-orb sad-orb-1"></div>
+    <div class="sad-orb sad-orb-2"></div>
+
+    <!-- Falling tears -->
+    <div class="sad-particles" id="sadParticles"></div>
+
+    <!-- Main content -->
+    <div class="sad-content">
+        <div class="sad-emoji">😿</div>
+        <h1 class="sad-title">Das meinst du nicht ernst???</h1>
+        <div class="broken-heart">💔</div>
+        <br>
+        <a href="index.html" class="back-btn">Nochmal überlegen...</a>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        style="position: fixed; bottom: 12px; left: 0; width: 100%; text-align: center; z-index: 5; pointer-events: none;">
+        <p
+            style="font-family: 'Inter', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.25); letter-spacing: 0.3px;">
+            © Valentinka 2026. Alle Rechte, wie auch meine Liebe, sind geschützt und gehören Anastasia Tome💗
+        </p>
+    </footer>
+
+    <script>
+        // Generate falling tear drops
+        const container = document.getElementById('sadParticles');
+        const tears = ['💧', '•', '·'];
+
+        function createTear() {
+            const tear = document.createElement('span');
+            tear.className = 'tear';
+            tear.textContent = tears[Math.floor(Math.random() * tears.length)];
+            const size = 10 + Math.random() * 16;
+            const left = Math.random() * 100;
+            const duration = 4 + Math.random() * 6;
+            const delay = Math.random() * 3;
+            tear.style.cssText = `
+                font-size: ${size}px;
+                left: ${left}%;
+                animation-duration: ${duration}s;
+                animation-delay: ${delay}s;
+            `;
+            container.appendChild(tear);
+            setTimeout(() => {
+                if (tear.parentNode) tear.parentNode.removeChild(tear);
+            }, (duration + delay) * 1000);
+        }
+
+        // Initial batch
+        for (let i = 0; i < 12; i++) {
+            setTimeout(createTear, i * 300);
+        }
+        // Ongoing
+        setInterval(createTear, 800);
+    </script>
+</body>
+
+</html>

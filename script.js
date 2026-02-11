@@ -69,21 +69,25 @@
     startHearts();
 
     // ═══════════════════════════════════════
-    // "NEIN" BUTTON — DODGE 3x THEN CLICKABLE
+    // "NEIN" BUTTON — DODGE 5x THEN CLICKABLE
     // ═══════════════════════════════════════
-    const MAX_DODGES = 3;
+    const MAX_DODGES = 5;
     let buttonLocked = false;
 
-    // Fixed sequence: up, down, right
+    // Fixed sequence: up, down, right, left-up, down-right
     const dodgeMoves = [
-        { x: 0, y: -80 },    // 1st: fly up
-        { x: 0, y: 80 },     // 2nd: fly down
-        { x: 120, y: 0 },    // 3rd: fly right
+        { x: 0, y: -80 },     // 1st: fly up
+        { x: 0, y: 80 },      // 2nd: fly down
+        { x: 120, y: 0 },     // 3rd: fly right
+        { x: -130, y: -60 },  // 4th: fly left-up
+        { x: 80, y: 70 },     // 5th: fly down-right
     ];
 
     const dodgeTexts = [
         'Sicher? 🥺',
         'Wirklich?! 😤',
+        'Bitte nicht! 😭',
+        'Denk nochmal! 💔',
         'Na gut... 😢',
     ];
 

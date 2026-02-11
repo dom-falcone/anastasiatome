@@ -321,6 +321,30 @@
             }
         }
 
+        @keyframes photoFloat1 {
+
+            0%,
+            100% {
+                transform: rotate(-6deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-4deg) translateY(-8px);
+            }
+        }
+
+        @keyframes photoFloat2 {
+
+            0%,
+            100% {
+                transform: rotate(5deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(7deg) translateY(-10px);
+            }
+        }
+
         /* Confetti canvas */
         #confettiCanvas {
             position: fixed;
@@ -371,6 +395,50 @@
     <div class="love-content">
         <div class="love-emoji">💖</div>
         <h1 class="love-title">Ich wusste es!</h1>
+
+        <!-- Photo Frames -->
+        <div
+            style="display: flex; justify-content: center; align-items: center; gap: 16px; margin: 28px 0 24px; perspective: 600px;">
+            <div style="
+                background: white;
+                padding: 8px 8px 28px 8px;
+                border-radius: 4px;
+                box-shadow: 0 8px 28px rgba(0,0,0,0.25), 0 0 20px rgba(240, 98, 146, 0.2);
+                transform: rotate(-6deg);
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                max-width: 160px;
+                animation: photoFloat1 3s ease-in-out infinite;
+            ">
+                <img src="foto1.jpg" alt="💗" style="
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    border-radius: 2px;
+                    aspect-ratio: 3/4;
+                    object-fit: cover;
+                ">
+            </div>
+            <div style="
+                background: white;
+                padding: 8px 8px 28px 8px;
+                border-radius: 4px;
+                box-shadow: 0 8px 28px rgba(0,0,0,0.25), 0 0 20px rgba(240, 98, 146, 0.2);
+                transform: rotate(5deg);
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+                max-width: 160px;
+                animation: photoFloat2 3s ease-in-out infinite;
+            ">
+                <img src="foto2.jpg" alt="💗" style="
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    border-radius: 2px;
+                    aspect-ratio: 3/4;
+                    object-fit: cover;
+                ">
+            </div>
+        </div>
+
         <p class="love-text">Du bist die Beste, was mir je passiert ist. Ich liebe dich unendlich! 💗</p>
         <div class="love-date">14. Februar 2026</div>
         <div class="love-hearts">

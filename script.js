@@ -118,7 +118,25 @@
         const scale = 1 + noClickCount * 0.08;
         btnYes.style.transform = `scale(${Math.min(scale, 1.3)})`;
 
-        // After 3 dodges → button stays, becomes clickable
+        // After 3rd dodge → show teasing popup for 5 seconds
+        if (noClickCount === 3) {
+            const popup = document.getElementById('teasePopup');
+            if (popup) {
+                buttonLocked = true; // Pause dodges during popup
+                popup.style.display = 'flex';
+
+                setTimeout(() => {
+                    popup.querySelector('div').style.animation = 'teaseExit 0.5s ease forwards';
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                        popup.querySelector('div').style.animation = 'teaseEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        buttonLocked = false; // Resume dodges
+                    }, 500);
+                }, 5000);
+            }
+        }
+
+        // After all dodges → button stays, becomes clickable
         if (noClickCount >= MAX_DODGES) {
             buttonLocked = true;
             textEl.textContent = 'Nein 😢';

@@ -147,9 +147,6 @@
         }
     }
 
-    // Detect touch device
-    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
     // Scale dodge moves for small screens
     function getScaledMove(move) {
         const isSmall = window.innerWidth <= 480;
@@ -157,16 +154,14 @@
         return { x: move.x * scale, y: move.y * scale };
     }
 
-    // Desktop: hover triggers dodge (only on non-touch devices)
-    if (!isTouchDevice) {
-        btnNo.addEventListener('mouseenter', () => {
-            if (!buttonLocked) {
-                dodgeButton();
-            }
-        });
-    }
+    // Hover triggers dodge (desktop + mobile)
+    btnNo.addEventListener('mouseenter', () => {
+        if (!buttonLocked) {
+            dodgeButton();
+        }
+    });
 
-    // Touch/Click: dodge on tap, OR navigate if locked
+    // Click/Tap: dodge OR navigate if locked
     btnNo.addEventListener('click', (e) => {
         e.preventDefault();
         if (!buttonLocked) {

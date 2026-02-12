@@ -71,49 +71,188 @@
         position: fixed;
         inset: 0;
         z-index: 10000;
-        background: rgba(10, 0, 20, 0.75);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        background: radial-gradient(ellipse at center, rgba(60, 10, 40, 0.85), rgba(15, 0, 20, 0.92));
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         justify-content: center;
         align-items: center;
     ">
-        <div style="
-            background: linear-gradient(135deg, rgba(60, 20, 80, 0.9), rgba(120, 40, 90, 0.85), rgba(180, 60, 100, 0.8));
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            padding: 40px 36px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 80px rgba(200, 100, 180, 0.2), inset 0 1px 0 rgba(255,255,255,0.1);
-            animation: teaseEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        ">
-            <div style="font-size: 56px; margin-bottom: 12px; animation: teaseShake 0.5s ease-in-out 0.3s;">😂😂😂</div>
-            <h2 style="
-                font-family: 'Playfair Display', serif;
-                font-size: 1.6rem;
-                font-weight: 700;
-                color: white;
-                margin: 0 0 12px;
-                line-height: 1.3;
-            ">Hahaha! Erwischt!</h2>
-            <p style="
-                font-family: 'Inter', sans-serif;
-                font-size: 1.05rem;
-                color: rgba(255, 255, 255, 0.85);
-                margin: 0 0 16px;
-                line-height: 1.6;
-            ">Dachtest du wirklich, ich lass dich <strong style="color: #ff8fab;">Nein</strong> sagen?! 😏<br>Keine
-                Chance, mein Schatz! 💗</p>
-            <div style="font-size: 40px; animation: teaseShake 0.6s ease-in-out 0.6s;">👊👊</div>
+        <!-- Sparkle Particles -->
+        <div class="tease-sparkles">
+            <span class="tease-spark" style="top:15%;left:12%;animation-delay:0s;">✨</span>
+            <span class="tease-spark" style="top:25%;right:15%;animation-delay:0.4s;">💫</span>
+            <span class="tease-spark" style="bottom:30%;left:18%;animation-delay:0.8s;">⭐</span>
+            <span class="tease-spark" style="bottom:20%;right:12%;animation-delay:1.2s;">✨</span>
+            <span class="tease-spark" style="top:40%;left:8%;animation-delay:0.6s;">💖</span>
+            <span class="tease-spark" style="top:35%;right:8%;animation-delay:1s;">💗</span>
+        </div>
+
+        <div class="tease-card">
+            <!-- Top emoji row with bounce-in -->
+            <div class="tease-emoji-row">
+                <span class="tease-emoji" style="animation-delay: 0.2s;">😂</span>
+                <span class="tease-emoji" style="animation-delay: 0.35s;">🤣</span>
+                <span class="tease-emoji" style="animation-delay: 0.5s;">😂</span>
+            </div>
+
+            <!-- Title with gradient text -->
+            <h2 class="tease-title">Hahaha! Erwischt!</h2>
+
+            <!-- Message -->
+            <p class="tease-message">
+                Dachtest du wirklich, ich lass dich<br>
+                <span class="tease-nein">Nein</span> sagen?! 😏
+            </p>
+            <p class="tease-submessage">Keine Chance, mein Schatz! 💗</p>
+
+            <!-- Bottom emoji -->
+            <div class="tease-bottom-emoji">
+                <span style="animation-delay: 0.8s;" class="tease-emoji">🫶</span>
+            </div>
+
+            <!-- Countdown bar -->
+            <div class="tease-countdown-track">
+                <div class="tease-countdown-bar" id="teaseCountdown"></div>
+            </div>
         </div>
     </div>
 
     <style>
+        .tease-card {
+            background: linear-gradient(145deg, #ff6b9d 0%, #c44d80 30%, #9b3a6e 60%, #6a2555 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            border-radius: 28px;
+            padding: 44px 40px 32px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 24px 80px rgba(200, 50, 100, 0.4),
+                0 0 100px rgba(255, 100, 150, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            animation: teaseEntry 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Glass shimmer overlay */
+        .tease-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.12), transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Animated glow ring */
+        .tease-card::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 30px;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 150, 200, 0.5), transparent, rgba(255, 200, 220, 0.3), transparent);
+            z-index: -1;
+            animation: teaseGlow 3s linear infinite;
+        }
+
+        .tease-emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tease-emoji {
+            font-size: 52px;
+            display: inline-block;
+            animation: teaseBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+        }
+
+        .tease-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 14px;
+            line-height: 1.2;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            animation: teaseFadeUp 0.5s ease 0.3s backwards;
+        }
+
+        .tease-message {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 0 6px;
+            line-height: 1.6;
+            animation: teaseFadeUp 0.5s ease 0.45s backwards;
+        }
+
+        .tease-nein {
+            color: #ffd1dc;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            text-decoration-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .tease-submessage {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0 18px;
+            animation: teaseFadeUp 0.5s ease 0.55s backwards;
+        }
+
+        .tease-bottom-emoji {
+            margin-bottom: 20px;
+        }
+
+        /* Countdown bar */
+        .tease-countdown-track {
+            width: 80%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .tease-countdown-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #ffd1dc, #ffffff, #ffd1dc);
+            border-radius: 4px;
+            animation: teaseCountdown 5s linear forwards;
+        }
+
+        /* Sparkle particles */
+        .tease-sparkles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tease-spark {
+            position: absolute;
+            font-size: 24px;
+            animation: teaseSparkle 2s ease-in-out infinite;
+        }
+
+        /* Animations */
         @keyframes teaseEntry {
             0% {
                 opacity: 0;
-                transform: scale(0.5) rotate(-8deg);
+                transform: scale(0.3) rotate(-12deg);
+            }
+
+            60% {
+                transform: scale(1.05) rotate(2deg);
             }
 
             100% {
@@ -122,19 +261,65 @@
             }
         }
 
-        @keyframes teaseShake {
+        @keyframes teaseBounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0) translateY(30px);
+            }
 
-            0%,
+            60% {
+                transform: scale(1.3) translateY(-5px);
+            }
+
             100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes teaseFadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes teaseGlow {
+            from {
                 transform: rotate(0deg);
             }
 
-            25% {
-                transform: rotate(-8deg) scale(1.1);
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes teaseSparkle {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8) translateY(0);
             }
 
-            75% {
-                transform: rotate(8deg) scale(1.1);
+            50% {
+                opacity: 1;
+                transform: scale(1.2) translateY(-12px);
+            }
+        }
+
+        @keyframes teaseCountdown {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
             }
         }
 
@@ -146,7 +331,41 @@
 
             100% {
                 opacity: 0;
-                transform: scale(0.8) translateY(30px);
+                transform: scale(0.6) rotate(8deg) translateY(40px);
+            }
+        }
+
+        /* Mobile popup sizing */
+        @media (max-width: 480px) {
+            .tease-card {
+                padding: 28px 24px 22px;
+                border-radius: 22px;
+                max-width: 320px;
+            }
+
+            .tease-emoji {
+                font-size: 40px;
+            }
+
+            .tease-title {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+
+            .tease-message {
+                font-size: 0.95rem;
+            }
+
+            .tease-submessage {
+                font-size: 0.9rem;
+            }
+
+            .tease-bottom-emoji .tease-emoji {
+                font-size: 36px;
+            }
+
+            .tease-spark {
+                font-size: 18px;
             }
         }
     </style>

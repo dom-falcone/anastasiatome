@@ -98,7 +98,8 @@
     function dodgeButton() {
         if (buttonLocked) return;
 
-        const move = dodgeMoves[noClickCount];
+        const rawMove = dodgeMoves[noClickCount];
+        const move = getScaledMove(rawMove);
         const text = dodgeTexts[noClickCount];
         noClickCount++;
 
@@ -126,10 +127,13 @@
                 popup.style.display = 'flex';
 
                 setTimeout(() => {
-                    popup.querySelector('div').style.animation = 'teaseExit 0.5s ease forwards';
+                    popup.querySelector('.tease-card').style.animation = 'teaseExit 0.5s ease forwards';
                     setTimeout(() => {
                         popup.style.display = 'none';
-                        popup.querySelector('div').style.animation = 'teaseEntry 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        popup.querySelector('.tease-card').style.animation = 'teaseEntry 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                        // Reset countdown bar
+                        const bar = document.getElementById('teaseCountdown');
+                        if (bar) { bar.style.animation = 'none'; bar.offsetHeight; bar.style.animation = 'teaseCountdown 5s linear forwards'; }
                         buttonLocked = false; // Resume dodges
                     }, 500);
                 }, 5000);
@@ -143,14 +147,26 @@
         }
     }
 
-    // Desktop: hover triggers dodge
-    btnNo.addEventListener('mouseenter', () => {
-        if (!buttonLocked) {
-            dodgeButton();
-        }
-    });
+    // Detect touch device
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-    // Click: dodge on mobile, OR navigate if locked
+    // Scale dodge moves for small screens
+    function getScaledMove(move) {
+        const isSmall = window.innerWidth <= 480;
+        const scale = isSmall ? 0.5 : 1;
+        return { x: move.x * scale, y: move.y * scale };
+    }
+
+    // Desktop: hover triggers dodge (only on non-touch devices)
+    if (!isTouchDevice) {
+        btnNo.addEventListener('mouseenter', () => {
+            if (!buttonLocked) {
+                dodgeButton();
+            }
+        });
+    }
+
+    // Touch/Click: dodge on tap, OR navigate if locked
     btnNo.addEventListener('click', (e) => {
         e.preventDefault();
         if (!buttonLocked) {

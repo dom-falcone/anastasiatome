@@ -729,6 +729,13 @@ body {
         width: 150px;
         height: 150px;
     }
+
+    /* Nein button: ensure touch-friendly size */
+    .btn-no {
+        min-width: 120px;
+        min-height: 44px;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 360px) {
